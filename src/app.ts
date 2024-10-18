@@ -49,6 +49,7 @@ app.get("/", async function (req, res) {
 app.get("/getproduct", async function (req, res) {
   const companyRepo = AppDataSource.getRepository(Company);
   //insert
+  const companyFound = await companyRepo.find();
   let products: Product[] = [];
   let iphone = new Product();
   iphone.name = "iphone";

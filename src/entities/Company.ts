@@ -10,6 +10,6 @@ export class Company {
   @Column()
   description: string;
 
-  @OneToMany(() => Product, (product) => product.company, { cascade: true }) //cascade true means first we have to insert products then companyy
+  @OneToMany(() => Product, (product) => product.company, { cascade: true, eager:true }) //cascade true means first we have to insert products then companyy
   products: Product[];
 }
