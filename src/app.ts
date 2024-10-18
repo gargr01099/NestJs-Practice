@@ -2,8 +2,6 @@ import "reflect-metadata";
 import express from "express";
 const app = express();
 import { DataSource } from "typeorm";
-import { User } from "./entities/User";
-import { Profile } from "./entities/Profile";
 import { Company } from "./entities/Company";
 import { Product } from "./entities/Products";
 app.use(express.json());
