@@ -14,41 +14,46 @@ app.get("/", async function (req, res) {
   //   //find all the records
   // const allRecords = await userRepo.find(); //find proivded by typeorm
   //   res.json(allRecords);
+const profileRepo = AppDataSource.getRepository(Profile);
+await profileRepo.delete(2);
+res.send("prfile deleted"); 
 
-  let profile: Profile = new Profile();
-  profile.name = "rahul";
-  profile.description = "hello";
-  profile.filename = "rahul.jpg";
-  profile.views = 100;
-  profile.isPublished = true;
+  // let profile: Profile = new Profile();
+  // profile.name = "rahul";
+  // profile.description = "hello";
+  // profile.filename = "rahul.jpg";
+  // profile.views = 100;
+  // profile.isPublished = true;
 
   //   const profileInserted = await AppDataSource.getRepository(Profile).save(
   //     profile
   //   );
 
-  const userFound = await userRepo.findOne({
-    where: { id: 4 },
-  });
-  if (userFound) {
-    userFound.email = "email@gmail.com";
-    userFound.firstName = "rahul";
-    userFound.lastName = "garg";
-    userFound.profile.filename = "garg.jpg";
-    const updatedRecord = await userRepo.save(userFound);
-    res.json(updatedRecord);
-  } else {
-    res.send("record does not exist");
-  }
+  // const userFound = await userRepo.findOne({
+  //   where: { id: 4 },
+  // });
+  // if (userFound) {
+  //   userFound.email = "email@gmail.com";
+  //   userFound.firstName = "rahul";
+  //   userFound.lastName = "garg";
+  //   userFound.profile.filename = "garg.jpg";
+  //   const updatedRecord = await userRepo.save(userFound);
+  //   res.json(updatedRecord);
+  // } else {
+  //   res.send("record does not exist");
+  // }
 
-  let user: User = new User();
-  user.email = "rahul@gmail.com";
-  user.firstName = "rahul";
-  user.lastName = "garg";
-  user.profile = profile;
+  // let user: User = new User();
+  // user.email = "rahul@gmail.com";
+  // user.firstName = "rahul";
+  // user.lastName = "garg";
+  // user.profile = profile;
 
-  const userInserted = await userRepo.save(user);
-  res.json(userInserted);
+  // const userInserted = await userRepo.save(user);
+  // res.json(userInserted);
 });
+
+
 const AppDataSource = new DataSource({
   type: "postgres",
   host: "localhost",
