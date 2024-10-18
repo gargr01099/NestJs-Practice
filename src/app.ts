@@ -25,7 +25,21 @@ app.get("/", async function (req, res) {
   //   const profileInserted = await AppDataSource.getRepository(Profile).save(
   //     profile
   //   );
-  const allrecords = await userRepo.find({ relations: { profile: true } }); //here we can remove relation also bcz we have used eager true in users indormation means we will get profile information too everytime.
+
+  const userFound = await userRepo.findOne({
+    where: { id: 4 },
+  });
+  if (userFound) {
+    userFound.email = "email@gmail.com";
+    userFound.firstName = "rahul";
+    userFound.lastName = "garg";
+    userFound.profile.filename = "garg.jpg";
+    const updatedRecord = await userRepo.save(userFound);
+    res.json(updatedRecord);
+  } else {
+    res.send("record does not exist");
+  }
+
   let user: User = new User();
   user.email = "rahul@gmail.com";
   user.firstName = "rahul";
