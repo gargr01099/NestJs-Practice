@@ -1,18 +1,24 @@
-import { Company } from './Company';
-import {Entity, PrimaryGeneratedColumn,Column,OneToMany, ManyToOne} from "typeorm";
+import { Company } from "./Company";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  ManyToOne,
+} from "typeorm";
 @Entity()
-export class Product{
-    @PrimaryGeneratedColumn()
-    id:number;
-    @Column()
-    name:string;
+export class Product {
+  @PrimaryGeneratedColumn()
+  id: number;
+  @Column()
+  name: string;
 
-    @Column()
-    price:number;
+  @Column()
+  price: number;
 
-    @Column()
-    description:string;
+  @Column()
+  description: string;
 
-    @ManyToOne(()=>Company, (company)=>company.products)
-    company:Company;
+  @ManyToOne(() => Company, (company) => company.products)
+  company: Company;
 }

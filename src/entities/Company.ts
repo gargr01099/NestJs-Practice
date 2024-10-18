@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import {Product} from  "./Products" ;
+import { Product } from "./Products";
 @Entity()
 export class Company {
   @PrimaryGeneratedColumn()
@@ -10,9 +10,6 @@ export class Company {
   @Column()
   description: string;
 
-  @Column()
-  price: number;
-
-@OneToMany(()=>Product,(product)=>product.company)
-  products:Product[]
+  @OneToMany(() => Product, (product) => product.company, { cascade: true }) //cascade true means first we have to insert products then companyy
+  products: Product[];
 }
