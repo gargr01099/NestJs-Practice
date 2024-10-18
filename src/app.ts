@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import express from "express";
 const app = express();
-import { DataSource } from "typeorm";
+import { DataSource, LessThan } from "typeorm";
 import { Company } from "./entities/Company";
 import { Product } from "./entities/Products";
 app.use(express.json());
@@ -49,7 +49,16 @@ app.get("/", async function (req, res) {
 app.get("/getproduct", async function (req, res) {
   const companyRepo = AppDataSource.getRepository(Company);
   //insert
-  const companyFound = await companyRepo.find();
+  const companyFound = await companyRepo.find({
+    relations: {
+      products: true,
+    },
+    where: {
+      products:{
+      price: LessThan(1000000),
+    },
+  }
+  });
   let products: Product[] = [];
   let iphone = new Product();
   iphone.name = "iphone";
