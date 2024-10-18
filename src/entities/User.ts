@@ -3,7 +3,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
   JoinColumn,
-  OneToOne
+  OneToOne,
 } from "typeorm";
 import { Profile } from "./Profile";
 @Entity()
@@ -17,7 +17,7 @@ export class User {
   @Column()
   email: string;
 
-  @OneToOne(() => Profile, { cascade: true, eager: true, onDelete: "CASCADE" })
+  @OneToOne(() => Profile, { cascade: true, eager: true, onDelete: "CASCADE" }) //onDelete cascade means when that profile gets deleted then that mapped user will also gets deleted.
   @JoinColumn()
   profile: Profile;
 }
